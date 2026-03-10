@@ -10,7 +10,7 @@
 # @raycast.icon 💬
 #
 # Documentation:
-# @raycast.description Copy verification code from a message in 10 minutes. 
+# @raycast.description Copy verification code from a message in 10 minutes.
 # @raycast.author Immanuel-Aristotle
 # @raycast.authorURL https://github.com/Immanuel-Aristotle
 
@@ -21,7 +21,7 @@ import subprocess
 # --- Configuration ---
 username = "veritas"
 TIME_WINDOW_SECONDS = 600
-KEYWORDS = ["验证码", "code"]
+KEYWORDS = ["验证码", "code", "验证代码"]
 
 db_path = f"/Users/{username}/Library/Messages/chat.db"
 
@@ -73,6 +73,6 @@ if not codes_found:
 code = codes_found[-1]
 
 # Copy to clipboard
-subprocess.run("pbcopy", text=True, input=code)
+subprocess.run("pbcopy", text=True, input=code, check=True)
 
 print(f"{code} code copied!")

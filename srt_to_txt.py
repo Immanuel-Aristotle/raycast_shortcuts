@@ -7,6 +7,7 @@
 # @raycast.packageName Utils
 
 # Optional parameters:
+# @raycast.icon 📝
 
 # Documentation:
 # @raycast.author Immanuel-Aristotle
@@ -15,7 +16,7 @@
 # @raycast.description Converts an SRT file to a plain text file with subtitles grouped into paragraphs every `max_duration` seconds.
 #
 # @raycast.argument1 { "type": "text", "placeholder": ".srt file path" }
-# @raycast.argument2 { "type": "text", "optional": true, "placeholder": "duration" }
+# @raycast.argument2 { "type": "text", "optional": true, "placeholder": "duration"}
 
 
 import sys
@@ -62,7 +63,7 @@ def srt_to_paragraphs(input_file_path, max_duration):
         all_paragraphs.append(" ".join(paragraph))
 
     # Write the result to the output file
-    with open(output_file_path, "w", encoding="utf-8") as output_file:
+    with open(output_file_path, "w", encoding="UTF8") as output_file:
         output_file.write("\n\n".join(all_paragraphs))
         output_file.write("\n")
 

@@ -14,7 +14,7 @@
 # @raycast.author Immanuel-Aristotle
 # @raycast.authorURL https://github.com/Immanuel-Aristotle
 
-# @raycast.description Get the sharelink for mounted file in google drive via cloudmounter
+# @raycast.description Get the sharelink for mounted file in google drive via rclone.
 #
 # @raycast.argument1 { "type": "text", "placeholder": "mounted file path" }
 
@@ -52,14 +52,14 @@ def get_share_link(input_path: str):
         full_path = Path(input_path).resolve()
         mount_point = Path(MOUNT_POINT).resolve()
         
-    except Exception as e:
+    except (OSError, RuntimeError) as e:
         print(f"Error processing path: {e}", file=sys.stderr)
         sys.exit(1)
 
 
     # 2. 验证路径是否在挂载点内
     if not str(full_path).startswith(str(mount_point)):
-        print(f"Error: File is not inside the specified CloudMounter drive.", file=sys.stderr)
+        print("Error: File is not inside the specified CloudMounter drive.", file=sys.stderr)
         print(f"File path:   {full_path}", file=sys.stderr)
         print(f"Mount point: {mount_point}", file=sys.stderr)
         sys.exit(1)
@@ -100,16 +100,16 @@ def get_share_link(input_path: str):
         # 5. 自动复制到剪贴板 (macOS/Linux)
         if sys.platform == "darwin":
             # macOS 使用 pbcopy
-            subprocess.run(['pbcopy'], input=share_link, text=True)
+            subprocess.run(['pbcopy'], input=share_link, text=True, check=True)
             print("(Link copied to clipboard via pbcopy)")
         elif os.environ.get('DISPLAY'):
             # Linux 如果有 X server 运行，尝试 xclip
-            subprocess.run(['xclip', '-selection', 'c'], input=share_link, text=True)
+            subprocess.run(['xclip', '-selection', 'c'], input=share_link, text=True, check=True)
             print("(Link copied to clipboard via xclip)")
         # Windows 也可以使用 pyperclip 库，但这里保持依赖最少
 
     except subprocess.CalledProcessError as e:
-        print(f"\nError: rclone failed to retrieve the link.", file=sys.stderr)
+        print("\nError: rclone failed to retrieve the link.", file=sys.stderr)
         # 打印 rclone 的错误输出
         print(f"rclone Error Output (stderr): {e.stderr.strip()}", file=sys.stderr)
         print(f"Command run: {' '.join(e.cmd)}", file=sys.stderr)

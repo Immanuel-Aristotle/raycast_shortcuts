@@ -64,7 +64,7 @@ lon_dec = dms_to_decimal(matches[1])
 gmaps_format = f"{lat_dec}, {lon_dec}"
 
 # copy to clipboard
-subprocess.run("pbcopy", text=True, input=gmaps_format)
+subprocess.run("pbcopy", text=True, input=gmaps_format, check=True)
 
 print("Latitude :", lat_dec)
 print("Longitude:", lon_dec)

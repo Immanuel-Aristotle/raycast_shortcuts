@@ -24,6 +24,6 @@ input_str = sys.argv[1]
 
 trimmed = input_str.replace(" ", "")
 
-subprocess.run("pbcopy", text=True, input=trimmed)
+subprocess.run("pbcopy", text=True, input=trimmed, check=True)
 
 print(f"\n📋 Copied to clipboard: {trimmed}")
