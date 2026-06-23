@@ -51,8 +51,8 @@ if not rows:
     raise SystemExit(0)
 
 # --- Regex preparation ---
-keyword_pattern = re.compile("|".join(KEYWORDS), re.IGNORECASE)
-code_pattern = re.compile(r"\b\d{4,6}\b")
+keyword_pattern = re.compile('|'.join(KEYWORDS), re.IGNORECASE)
+code_pattern = re.compile(r'(?<!\d)\d{4,6}(?!\d)')
 
 codes_found = []
 
