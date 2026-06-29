@@ -1,0 +1,13 @@
+[MAIN]
+ignored-modules=pysrt
+
+[MESSAGES CONTROL]
+disable=
+    broad-exception-caught,
+    invalid-name,
+    line-too-long,
+    missing-function-docstring,
+    missing-module-docstring,
+    multiple-imports,
+    trailing-whitespace,
+    wrong-import-order
